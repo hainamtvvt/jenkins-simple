@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'pip3 install -f s05/python-simple-app/requirements.txt'
+                sh 'pip install -f s05/python-simple-app/requirements.txt'
             }
         }
         stage('run') {
