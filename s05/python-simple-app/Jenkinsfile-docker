@@ -1,0 +1,19 @@
+pipeline {
+    agent {
+        docker {
+            image '3.9.19-alpine'
+        }
+    }
+    stages {
+        stage('build') {
+            steps {
+                sh 'pip3 install -f s05/python-simple-app/requirements.txt'
+            }
+        }
+        stage('run') {
+            steps {
+                sh 'python3 run s05/python-simple-app/app.py'
+            }
+        }
+    }
+}
