@@ -32,7 +32,7 @@ pipeline {
         stage('build-image'){
             agent {
                 docker {
-                    image 'cli'
+                    image '26-cli'
                 }
             }
             steps {
