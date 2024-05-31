@@ -2,8 +2,8 @@ pipeline {
     agent none
     environment {
         // Telegram configuration
-        TOKEN = credentials('7066900760:AAFdgmTYrwx8F6XfzV1bsuaPw_dGuEt9LBU')
-        CHAT_ID = credentials('1241592341')
+        TOKEN = credentials('')
+        CHAT_ID = credentials('')
     }
     // agent {
     //     docker {
