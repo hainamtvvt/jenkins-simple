@@ -1,5 +1,10 @@
 pipeline {
     agent none
+    environment {
+        // Telegram configuration
+        TOKEN = credentials('7066900760:AAFdgmTYrwx8F6XfzV1bsuaPw_dGuEt9LBU')
+        CHAT_ID = credentials('1241592341')
+    }
     // agent {
     //     docker {
     //         image 'python:3-alpine'
@@ -37,6 +42,18 @@ pipeline {
             }
             steps {
                 sh 'docker build -t s05/python-simple-app/Dockerfile .'
+            }
+        }
+    }
+    post {
+        success {
+            script {
+                bat "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"chat_id\\\":${CHAT_ID}, \\\"text\\\": \\\"Pipeline succeeded!\\\", \\\"disable_notification\\\": false}\" https://api.telegram.org/bot${TOKEN}/sendMessage"
+            }
+        }
+        failure {
+            script {
+                bat "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"chat_id\\\":${CHAT_ID}, \\\"text\\\": \\\"Pipeline failed!\\\", \\\"disable_notification\\\": false}\" https://api.telegram.org/bot${TOKEN}/sendMessage"
             }
         }
     }
